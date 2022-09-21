@@ -68,11 +68,11 @@ class SaveImage {
                 return false;
             }
 
-            // //Valida el tipo de imagen
-            // if($typeFile != 'jpg' || $typeFile != 'jpeg'){    
-            //     $this->setError("Solo se admiten archivos jpg/jpeg");
-            //     return false;
-            // }
+            //Valida el tipo de imagen
+            if($typeFile != 'jpg' && $typeFile != 'jpeg'){    
+                $this->setError("Solo se admiten archivos jpg/jpeg");
+                return false;
+            }
 
             //Valida si existe un error al subir la imagen
             if(!move_uploaded_file($file["tmp_name"], $img)){
