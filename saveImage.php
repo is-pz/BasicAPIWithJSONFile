@@ -46,6 +46,15 @@ class SaveImage {
         return $this;
     }
 
+    /**
+     * It checks if the file is an image, if it is, it checks if it's a jpg, if it is, it checks if
+     * it's less than 500kb, if it is, it checks if it can be moved to the server, if it can, it
+     * returns true, if it can't, it returns false.
+     * 
+     * @param file The file to upload.
+     * 
+     * @return bool a boolean value.
+     */
     function saveImage($file){
         $directory = "img/";
 
