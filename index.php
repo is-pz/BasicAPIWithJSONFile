@@ -13,6 +13,7 @@
         //Se verifica si es un numero
         if(!is_numeric($id)){
             $api->printError('El parametro es incorrecto');
+            die;
         }
         //Se regresa el elemento buscado
         $api->getOne($id);
