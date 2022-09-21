@@ -2,18 +2,8 @@
     "items": [
         {
             "id": 1,
-            "title": "pelicula 1",
-            "image": "pelicula1"
-        },
-        {
-            "id": 2,
-            "title": "pelicula 2",
-            "image": "pelicula 2"
-        },
-        {
-            "id": 3,
-            "title": "pelicula 3",
-            "image": "pelicula 3"
+            "title": "title",
+            "image": "name image"
         }
     ]
 }
