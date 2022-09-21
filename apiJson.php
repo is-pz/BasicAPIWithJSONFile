@@ -6,12 +6,12 @@ include_once 'saveImage.php';
 class ApiJson extends DBJSON{
     
     private $jsonFile;
-    private $nameJsonFile = "json.json";
+    private $pathJsonFile = "json.json";
     private $save;
 
     public function __construct()
     {   
-        $this->jsonFile = new DBJSON($this->nameJsonFile);
+        $this->jsonFile = new DBJSON($this->pathJsonFile);
         $this->saveImage = new SaveImage();
     }
     
