@@ -16,5 +16,24 @@ class DBJSON {
         return $dataFile;
     }
 
+    function orderData($arrayItem){
+        $fullData = json_decode($this->getContentJson(), true);
+        $lastID = end($fullData['items'])['id'];
+        $id = array(
+            'id' => $lastID + 1
+        );
+        $resultMerge = array_merge($id, $arrayItem);
 
+        array_push($fullData['items'], $resultMerge);
+        return (json_encode($fullData));
+    }
+
+    public function saveNewData($arrayItem){
+        
+        $dataToJson = $this->orderData($arrayItem);
+
+        $file = fopen($this->jsonFile, 'w');
+        fwrite($file, $dataToJson);
+        fclose($file);
+    }
 }
