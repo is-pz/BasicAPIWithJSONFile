@@ -14,7 +14,10 @@
             );
             
             $api->addNewEntry($item);
+            $api->printSuccess('Se agrego la entrada correctamente');
+        }else{
+            $api->printError('Error con el archivo'. $api->getError());
         }
-        
-
+    }else{
+        $api->printError('Error al llamar a la API');
     }

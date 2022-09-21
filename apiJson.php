@@ -1,24 +1,26 @@
 <?php
 
 include_once 'dbJson.php';
+include_once 'saveImage.php';
 
 class ApiJson extends DBJSON{
-
-    private $img;
-    private $error;
     
     private $jsonFile;
     private $nameJsonFile = "json.json";
+    private $save;
 
     public function __construct()
     {   
         $this->jsonFile = new DBJSON($this->nameJsonFile);
+        $this->saveImage = new SaveImage();
     }
+    
     
     function getAll(){
         return $this->jsonFile->getContentJson();
     }
     
+
     function getOne($id){
         $jsonToArray = json_decode($this->jsonFile->getContentJson(), true);
         $itemToReturn = array();
@@ -30,64 +32,42 @@ class ApiJson extends DBJSON{
         
         array_push($itemToReturn['item'], $fakeRow);
 
-        print(json_encode($itemToReturn));
+        $this->printJSON($itemToReturn);
 
     }
+
+
+    function printJSON($array){
+        echo '<code>' . json_encode($array) . '</code>';
+    }
+
+  
+    function printError($message){
+        echo '<code>'. json_encode(array('Message' => $message)) . '</code>';
+    }
+
+   
+    function printSuccess($message){
+        echo '<code>'. json_encode(array('Message' => $message)) . '</code>';
+    }
+
 
     function addNewEntry($item){
         $this->jsonFile->saveNewData($item);
     }
 
 
-    
-    function saveImage($file){
-        $directory = "img/";
-
-        $this->img = basename($file["name"]);
-        $archivo = $directory . basename($file["name"]);
-
-        $typeFile = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
-    
-        // valida que es img
-        $checarSiimg = getimagesize($file["tmp_name"]);
-
-        if($checarSiimg != false){
-            //validando tamaño del archivo
-            $size = $file["size"];
-
-            if($size > 500000){
-                $this->error = "El archivo tiene que ser menor a 500kb";
-                return false;
-            }else{
-
-                //validar tipo de img
-                if($typeFile == "jpg" || $typeFile == "jpeg"){
-                    // se validó el archivo correctamente
-                    if(move_uploaded_file($file["tmp_name"], $archivo)){
-                        //echo "El archivo se subió correctamente";
-                        return true;
-                    }else{
-                        $this->error = "Hubo un error en la subida del archivo";
-                        return false;
-                    }
-                }else{
-                    $this->error = "Solo se admiten archivos jpg/jpeg";
-                    return false;
-                }
-            }
-        }else{
-            $this->error = "El documento no es una imagen";
-            return false;
-        }
+    function saveImage($file){ 
+      return $this->save->saveImage($file);
     }
 
     
     function getImgName(){
-        return $this->img;
+        return $this->save->getImg();
     }
 
 
     function getError(){
-        return $this->error;
+        return $this->save->getError();
     }
 }
