@@ -9,9 +9,8 @@ class DBJSON {
     {   
         $this->jsonFile = $nameJsonFile;
     }
-    
 
-    public function getData(){
+    public function getContentJson(){
         $jsonFileName = $this->jsonFile;
         $dataFile = file_get_contents($jsonFileName);
         return $dataFile;

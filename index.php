@@ -1,13 +1,11 @@
 <?php
 
 
-    include_once 'dbJson.php';
+    include_once 'apiJson.php';
 
-    $api = new DBJSON('json.json');
+    $api = new ApiJson();
 
-
-    print_r($api->getData());
-
+    print_r($api->getAll());
 
 
     // include_once 'apiMovies.php';
