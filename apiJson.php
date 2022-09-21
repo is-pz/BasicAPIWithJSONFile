@@ -12,7 +12,7 @@ class ApiJson extends DBJSON{
     public function __construct()
     {   
         $this->jsonFile = new DBJSON($this->pathJsonFile);
-        $this->saveImage = new SaveImage();
+        $this->save = new SaveImage();
     }
     
     
@@ -31,7 +31,7 @@ class ApiJson extends DBJSON{
      * It takes the json file, converts it to an array, filters the array to find the item with the id
      * passed as a parameter, and returns the item found as json
      * 
-     * @param id The id of the item to be retrieved
+     * @param int id The id of the item to be retrieved
      * 
      * @return <code>{
      *     "item": [
