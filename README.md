@@ -6,15 +6,15 @@ Fake is for not complying with the rules of an API or REST API.
 
 ## List of files
 
-* dbJson.php This file contains the methods for reading and writing data from a JSON file.
+* dbJson.php - This file contains the methods for reading and writing data from a JSON file.
 
-* apiJson.php This file contains the methods for displaying the information, and connects to the script needed to save images.
+* apiJson.php - This file contains the methods for displaying the information, and connects to the script needed to save images.
 
-* addNewEntry.php This file validates that data is being received and is valid.
+* addNewEntry.php - This file validates that data is being received and is valid.
 
-* saveImage.php This file contains the methods for saving jpg/jpeg images.
+* saveImage.php - This file contains the methods for saving jpg/jpeg images.
 
-* index.php This file displays only all elements or only one element of the JSON file.
+* index.php - This file displays only all elements or only one element of the JSON file.
 
 # Use
 You need a JSON file in the root of the directory where the other files are located, the default name of the file is json.json, if you change its name or move it to another directory you must change it in the apiJson.php file.
