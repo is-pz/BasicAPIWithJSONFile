@@ -15,6 +15,14 @@ class ApiJson extends DBJSON{
         return $this->jsonFile->getContentJson();
     }
     
-    
+    function getOne($id){
+        $jsonToArray = json_decode($this->jsonFile->getContentJson(), true);
+        $itemSearch['item'] = current(array_filter($jsonToArray['items'], function ($v) use ($id){
+            return $v['id'] == $id;
+        }, ARRAY_FILTER_USE_BOTH));
+        
+        $itemSearch = json_encode($itemSearch);
+        print($itemSearch);
+    }
 
 }

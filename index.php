@@ -5,7 +5,9 @@
 
     $api = new ApiJson();
 
-    print_r($api->getAll());
+    // print_r($api->getAll());
+
+    $api->getOne(2);
 
 
     // include_once 'apiMovies.php';
