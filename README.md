@@ -1,4 +1,4 @@
-# Basic fake API
+# Fake basic API
 
 It is a simple and basic API attempt to read data from a JSON file, it has the ability to save new records in the same file.
 
@@ -35,5 +35,5 @@ You need a folder with the name "img" in the root to store the uploaded images, 
     	                        "image": "name image"
                             }]
                 }
-
+* /addNewEntry.php Receives by POST the title field and the image file to be saved.
 
