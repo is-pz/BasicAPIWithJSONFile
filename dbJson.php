@@ -5,9 +5,9 @@ class DBJSON {
     
     private $jsonFile;
 
-    public function __construct($pathJsonFile)
+    public function __construct()
     {   
-        $this->jsonFile = $pathJsonFile;
+        $this->jsonFile = "json.json"; // Path to JSON file
     }
 
    /**
