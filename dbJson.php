@@ -7,7 +7,7 @@ class DBJSON {
 
     public function __construct()
     {   
-        $this->jsonFile = "json.json"; // Path to JSON file
+        $this->jsonFile = "json.json"; // Path to JSON
     }
 
    /**
@@ -30,7 +30,11 @@ class DBJSON {
      * 
      * @return string the entire content of the file in json format.
      */
-    function orderData($arrayNewItem){
+    function orderData($jsonData){
+
+        //Convierte el json en un array para agregar un id
+        $jsonToArray = json_decode($jsonData, true);
+
         //Obtiene toda la informacion que contien el archivo en formato de array
         $fullData = json_decode($this->getContentJson(), true);
         //Obtiene el ID del ultimo elemento
@@ -40,7 +44,7 @@ class DBJSON {
             'id' => $lastID + 1
         );
         //Se hace un merge entre los dos arrays($arrayNewItem, $id)
-        $resultMerge = array_merge($id, $arrayNewItem);
+        $resultMerge = array_merge($id, $jsonToArray);
 
         //Se agrega el ultimo elemento al array fullData
         array_push($fullData['items'], $resultMerge);
@@ -54,9 +58,9 @@ class DBJSON {
      * 
      * @param array arrayItem The array of data to be added to the JSON file.
      */
-    public function saveNewData($arrayItem){
+    public function saveNewData($jsonData){
         //Ordena y agrega la nueva entrada
-        $dataToJson = $this->orderData($arrayItem);
+        $dataToJson = $this->orderData($jsonData);
 
         //Se abre el archivo para edicion
         $file = fopen($this->jsonFile, 'w');
@@ -64,5 +68,7 @@ class DBJSON {
         fwrite($file, $dataToJson);
         //Se cierra el archivo
         fclose($file);
+        //Cambiar por respuesta http
+        return $dataToJson;
     }
 }

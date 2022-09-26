@@ -110,8 +110,8 @@ class ApiJson extends DBJSON{
      * 
      * @param item The item to be added to the JSON file.
      */
-    function addNewEntry($item){
-        $this->jsonFile->saveNewData($item);
+    function addNewEntry($jsonData){
+        print($this->jsonFile->saveNewData($jsonData));
     }
 
 
