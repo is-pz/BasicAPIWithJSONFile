@@ -7,7 +7,7 @@ class DBJSON {
 
     public function __construct()
     {   
-        $this->jsonFile = "json.json"; // Path to JSON
+        $this->jsonFile = "json.json"; // Path to JSON File
     }
 
    /**
@@ -30,7 +30,7 @@ class DBJSON {
      * 
      * @return string the entire content of the file in json format.
      */
-    function orderData($jsonData){
+    private function orderData($jsonData){
 
         //Convierte el json en un array para agregar un id
         $jsonToArray = json_decode($jsonData, true);
@@ -53,6 +53,7 @@ class DBJSON {
         return (json_encode($fullData));
     }
 
+    
     /**
      * It takes an array of data, orders it, and then writes it to a file.
      * 
@@ -61,14 +62,91 @@ class DBJSON {
     public function saveNewData($jsonData){
         //Ordena y agrega la nueva entrada
         $dataToJson = $this->orderData($jsonData);
+        
+        //Se guarda el archivo con la nueva informacion
+        $this->saveFile($dataToJson);
 
-        //Se abre el archivo para edicion
-        $file = fopen($this->jsonFile, 'w');
-        //Se escribe la nueva informacion
-        fwrite($file, $dataToJson);
-        //Se cierra el archivo
-        fclose($file);
         //Cambiar por respuesta http
         return $dataToJson;
     }
+
+    
+    /**
+     * It takes a JSON string, decodes it to an array, then loops through the array and replaces the
+     * values of the array with the values of the JSON string.
+     * 
+     * @param jsonData the json data that is sent from the client side.
+     */
+    public function updateEntry($jsonData){
+
+        //Se convierte a array la informacion recivida
+        $jsonToArray = json_decode($jsonData, true);
+
+        //Se convierte en array todo el contenido de archivo json
+        $fullDataToArray = json_decode($this->getContentJson(), true);
+       
+        //Se recorre el array en busca del id enviado y si existe se modifican los datos
+        array_walk($fullDataToArray['items'], function(&$value) use ($jsonToArray){
+            if( $value['id'] == $jsonToArray['id'] ){
+                $value['title'] = $jsonToArray['title'];
+                $value['image'] = $jsonToArray['image'];
+            }
+        });
+      
+        //Se convierte nuevamente todo el array en un json
+        $fullDataToJson = json_encode($fullDataToArray);
+
+        //Se guarda el archivo json con los nuevos datos
+        $this->saveFile($fullDataToJson);
+
+        //Cambiar por respuesta http
+        print($fullDataToJson);
+    }
+
+
+    public function deleteEntry($jsonData){
+         
+        //Se convierte a array la informacion recivida
+         $jsonToArray = json_decode($jsonData, true);
+
+         //Se convierte en array todo el contenido de archivo json
+         $fullDataToArray = json_decode($this->getContentJson(), true);
+        
+         $keyItemToDelete = 0;
+
+         //Se recorre el array en busca del id enviado y si existe obtiene la clave
+         array_walk($fullDataToArray['items'], function($value, $key) use ($jsonToArray, &$keyItemToDelete){
+             if( $value['id'] == $jsonToArray['id'] ){
+                $keyItemToDelete = $key;
+             }
+         });
+
+         //Se elimina la seccion especifica
+         unset($fullDataToArray['items'][$keyItemToDelete]);
+        
+         //Se convierte nuevamente todo el array en un json
+         $fullDataToJson = json_encode($fullDataToArray);
+ 
+         //Se guarda el archivo json con los nuevos datos
+         $this->saveFile($fullDataToJson);
+ 
+         //Cambiar por respuesta http
+         print($fullDataToJson);
+
+    }
+
+    /**
+     * It opens a file, writes to it, and closes it
+     * 
+     * @param jsonData The data to be written to the file.
+     */
+    public function saveFile($jsonData){
+         //Se abre el archivo para edicion
+         $file = fopen($this->jsonFile, 'w');
+         //Se escribe la nueva informacion
+         fwrite($file, $jsonData);
+         //Se cierra el archivo
+         fclose($file);
+    }
+
 }

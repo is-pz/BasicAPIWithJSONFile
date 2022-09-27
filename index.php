@@ -26,10 +26,12 @@ switch($_SERVER['REQUEST_METHOD']){
         $api->addNewEntry($data);
         break;
     case 'PUT':
-    
+        $data = file_get_contents("php://input");
+        $api->updateEntry($data);
         break;
     case 'DELETE':
-    
+        $data = file_get_contents("php://input");
+        $api->deleteEntry($data);
         break;
     default:
         //Error message

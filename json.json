@@ -1,9 +1,1 @@
-{
-    "items": [
-        {
-            "id": 1,
-            "title": "title",
-            "image": "name image"
-        }
-    ]
-}
+{"items":[{"id":1,"title":"title 1","image":"name image"},{"id":2,"title":"title 2","image":"name image"}]}

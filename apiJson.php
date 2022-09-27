@@ -115,6 +115,24 @@ class ApiJson extends DBJSON{
     }
 
 
+   /**
+    * The function updateEntry() takes a JSON object as a parameter, and then calls the updateEntry()
+    * function of the jsonFile object, which is a member of the class, and then prints the result of
+    * that function.
+    * 
+    * @param jsonData The JSON data to be updated.
+    */
+    function updateEntry($jsonData){
+        print($this->jsonFile->updateEntry($jsonData));
+    }
+
+
+
+    function deleteEntry($jsonData){
+        $this->jsonFile->deleteEntry($jsonData);
+    }
+
+
     /**
      * It takes a file, and saves it to the server.
      * 
