@@ -15,7 +15,7 @@ switch($_SERVER['REQUEST_METHOD']){
         if(isset($_GET['id'])){
             //Valida que el id ingresado sea un numero
             if(!is_numeric($_GET['id'])){
-                $api->printError('El parametro es incorrecto');
+                print(json_encode($api->errors->error_400("El parametro es incorrecto")));
                 die;
             }
             $api->getOne($_GET['id']);
@@ -36,6 +36,6 @@ switch($_SERVER['REQUEST_METHOD']){
         $api->deleteEntry($data);
         break;
     default:
-        //Error message
+        print(json_encode($api->errors->error_400()));
     break;
 }

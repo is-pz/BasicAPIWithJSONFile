@@ -2,6 +2,7 @@
 
 include_once 'dbJson.php';
 include_once 'saveImage.php';
+include_once 'response.php';
 
 class ApiJson extends DBJSON{
     
@@ -9,10 +10,13 @@ class ApiJson extends DBJSON{
     
     private $save;
 
+    public $response;
+
     public function __construct()
     {   
         $this->jsonFile = new DBJSON();
         $this->save = new SaveImage();
+        $this->response = new Response();
     }
     
     
@@ -69,7 +73,7 @@ class ApiJson extends DBJSON{
             $this->printJSON($itemToReturn);
 
         }else{
-            $this->printError('No existe el registro');
+            $this->response->error_200('No se econtro el registro');
         }
     }
 
@@ -81,27 +85,6 @@ class ApiJson extends DBJSON{
      */
     function printJSON($array){
         echo '<code>' . json_encode($array) . '</code>';
-    }
-
-  
-    /**
-     * It takes a string and returns a JSON object with a single key-value pair
-     * 
-     * @param string message The message to be displayed.
-     */
-    function printError($message){
-        echo '<code>'. json_encode(array('Message' => $message)) . '</code>';
-    }
-
-   
-    /**
-     * It takes a string and prints it out as a JSON object with a key of "Message" and a value of the
-     * string.
-     * 
-     * @param string message The message to be displayed.
-     */
-    function printSuccess($message){
-        echo '<code>'. json_encode(array('Message' => $message)) . '</code>';
     }
 
 
@@ -134,7 +117,7 @@ class ApiJson extends DBJSON{
      * @param string jsonData The data to be written to the file.
      */
     function deleteEntry($jsonData){
-        $this->jsonFile->deleteEntry($jsonData);
+        print($this->jsonFile->deleteEntry($jsonData));
     }
 
 
