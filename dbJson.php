@@ -104,6 +104,13 @@ class DBJSON {
     }
 
 
+   /**
+    * It takes a JSON string, converts it to an array, then converts the entire JSON file to an array,
+    * then walks through the array looking for the ID of the item to delete, then deletes the item,
+    * then converts the array back to JSON, then saves the file, then prints the JSON.
+    * 
+    * @param string jsonData The JSON data that you want to delete.
+    */
     public function deleteEntry($jsonData){
          
         //Se convierte a array la informacion recivida
@@ -138,7 +145,7 @@ class DBJSON {
     /**
      * It opens a file, writes to it, and closes it
      * 
-     * @param jsonData The data to be written to the file.
+     * @param string jsonData The data to be written to the file.
      */
     public function saveFile($jsonData){
          //Se abre el archivo para edicion

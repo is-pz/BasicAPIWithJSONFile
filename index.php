@@ -8,8 +8,10 @@ $api = new ApiJson();
 header('Content-Type: application/json');
 
 
+/* A switch statement that is checking the request method.  */
 switch($_SERVER['REQUEST_METHOD']){
     case 'GET':
+        //Valida si se esta buscando un elemento en particular
         if(isset($_GET['id'])){
             //Valida que el id ingresado sea un numero
             if(!is_numeric($_GET['id'])){

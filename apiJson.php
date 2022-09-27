@@ -87,7 +87,7 @@ class ApiJson extends DBJSON{
     /**
      * It takes a string and returns a JSON object with a single key-value pair
      * 
-     * @param message The message to be displayed.
+     * @param string message The message to be displayed.
      */
     function printError($message){
         echo '<code>'. json_encode(array('Message' => $message)) . '</code>';
@@ -98,7 +98,7 @@ class ApiJson extends DBJSON{
      * It takes a string and prints it out as a JSON object with a key of "Message" and a value of the
      * string.
      * 
-     * @param message The message to be displayed.
+     * @param string message The message to be displayed.
      */
     function printSuccess($message){
         echo '<code>'. json_encode(array('Message' => $message)) . '</code>';
@@ -108,7 +108,7 @@ class ApiJson extends DBJSON{
     /**
      * This function takes an item and saves it to a file.
      * 
-     * @param item The item to be added to the JSON file.
+     * @param string jsonData The item to be added to the JSON file.
      */
     function addNewEntry($jsonData){
         print($this->jsonFile->saveNewData($jsonData));
@@ -120,7 +120,7 @@ class ApiJson extends DBJSON{
     * function of the jsonFile object, which is a member of the class, and then prints the result of
     * that function.
     * 
-    * @param jsonData The JSON data to be updated.
+    * @param string jsonData The JSON data to be updated.
     */
     function updateEntry($jsonData){
         print($this->jsonFile->updateEntry($jsonData));
@@ -128,6 +128,11 @@ class ApiJson extends DBJSON{
 
 
 
+    /**
+     * Delete an entry from the JSON file.
+     * 
+     * @param string jsonData The data to be written to the file.
+     */
     function deleteEntry($jsonData){
         $this->jsonFile->deleteEntry($jsonData);
     }
