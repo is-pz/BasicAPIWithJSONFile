@@ -51,7 +51,7 @@ class Response {
     * @return array The response is being returned.
     */
     public function error_201($message = "Datos alamcenados correctamente"){
-        $this->response['status'] = "error";
+        $this->response['status'] = "Success";
         $this->response['result'] = array(
             'code' => "201",
             'message' => $message
