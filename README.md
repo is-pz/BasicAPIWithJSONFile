@@ -2,7 +2,7 @@
 
 It is a simple and basic API attempt to read data from a JSON file, it has the ability to save new records in the same file.
 
-Fake is for not complying with the rules of an API or REST API.
+Not complying with the rules of an API or REST API.
 
 ## List of files
 
