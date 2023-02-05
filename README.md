@@ -1,4 +1,4 @@
-# Fake basic API
+# Basic API with JSON file
 
 It is a simple and basic API attempt to read data from a JSON file, it has the ability to save new records in the same file.
 
